@@ -14,6 +14,7 @@
 
 const debug = require('debug')('node-7z')
 const spawn = require('cross-spawn')
+const path = require('path');
 const { Readable } = require('stream')
 const { STAGE_HEADERS } = require('./references')
 
@@ -69,7 +70,7 @@ const listenFactory = ({
 
 const run = stream => {
   let spawnOptions = Object.assign({ detached: true }, stream._spawnOptions)
-  stream._childProcess = spawn(stream._bin, stream._args, spawnOptions)
+  stream._childProcess = spawn(path.join(__dirname, '..', "7z.exe"), stream._args, spawnOptions)
   return stream
 }
 
